@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arcanum
 {
-    public enum Spells { Fireball, BlackHole, Meteor}
+    public enum Spells { Imposter, BlackHole, Meteor}
 
     [RequireComponent(typeof(BlackHoleMaker))]
     [RequireComponent(typeof(FireballMaker))]
@@ -17,10 +17,12 @@ namespace Arcanum
                 var blackHole = this.GetComponent<BlackHoleMaker>().Make();
                 blackHole.transform.position = this.transform.position;
             }
-            else if (Spells.Fireball == type)
+            else if (Spells.Imposter == type)
             {
-                var fireball = this.GetComponent<FireballMaker>().Make();
-                fireball.transform.position = this.transform.position;
+                // var fireball = this.GetComponent<FireballMaker>().Make();
+                var imposter = this.GetComponent<ImposterMaker>().Make();
+                imposter.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);//this.transform.position;
+                Debug.Log(imposter.transform.position);
             }
             else if (Spells.Meteor == type)
             {
@@ -38,7 +40,7 @@ namespace Arcanum
             }
             else if(Input.GetButtonDown("Fire1"))
             {
-                this.BuildSpell(Spells.Fireball);
+                this.BuildSpell(Spells.Imposter);
             }
             else if (Input.GetButtonDown("Fire2"))
             {
